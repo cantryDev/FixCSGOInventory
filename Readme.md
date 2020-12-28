@@ -4,7 +4,7 @@ This chrome extension loads the csgo inventories over a more stable endpoint to 
 
 ## Showcase
 
-<img alt="Showcase" src="https://raw.githubusercontent.com/cantryDev/FixCSGOInventory/master/Showcase.gif">
+<img alt="Showcase" src="https://github.com/cantryDev/FixCSGOInventory/blob/master/Showcase.gif?raw=true">
 
 ## Installation
 
