@@ -568,7 +568,7 @@ CInventory.prototype.getTagContainer = function () {
 
 CInventory.prototype.GetInventoryLoadURL = function () {
     if (this.m_appid === 730) {
-        console.log("Loading inventory via fixed url :D")
+        console.log("Loading csgo inventory via different endpoint :D")
         return "https://steamcommunity.com/profiles/" + this.m_steamid + "/inventory/json/730/2/";
     }
 
@@ -851,33 +851,35 @@ CInventory.prototype.LoadMoreAssets = function (count) {
     return this.SetActivePromise($J.get(this.GetInventoryLoadURL(), params
     ).done(function (data) {
 
-        if (data.success !== undefined) {
+        if (data !== undefined) {
 
             if (data.success) {
-                let assets = [];
-                let total_inventory_count = 0;
-                Object.keys(data.rgInventory).forEach(key => {
-                    let currentAsset = data.rgInventory[key];
-                    let asset = {
-                        "appid": 730,
-                        "contextid": "2",
-                        "assetid": currentAsset.id,
-                        "classid": currentAsset.classid,
-                        "instanceid": currentAsset.instanceid,
-                        "amount": currentAsset.amount
-                    }
-                    total_inventory_count = currentAsset.pos;
-                    assets.push(asset);
-                });
-                let descriptions = [];
-                Object.keys(data.rgDescriptions).forEach(key => {
-                    descriptions.push(data.rgDescriptions[key]);
-                });
+                if (data.rgInventory) {
+                    let assets = [];
+                    let total_inventory_count = 0;
+                    Object.keys(data.rgInventory).forEach(key => {
+                        let currentAsset = data.rgInventory[key];
+                        let asset = {
+                            "appid": 730,
+                            "contextid": "2",
+                            "assetid": currentAsset.id,
+                            "classid": currentAsset.classid,
+                            "instanceid": currentAsset.instanceid,
+                            "amount": currentAsset.amount
+                        }
+                        total_inventory_count = currentAsset.pos;
+                        assets.push(asset);
+                    });
+                    let descriptions = [];
+                    Object.keys(data.rgDescriptions).forEach(key => {
+                        descriptions.push(data.rgDescriptions[key]);
+                    });
 
-                let success = 1;
-                let rwgrsn = -2;
-                assets.sort((a, b) => (parseInt(a.assetid) < parseInt(b.assetid)) ? 1 : ((parseInt(b.assetid) < parseInt(a.assetid)) ? -1 : 0));
-                data = {assets, descriptions, total_inventory_count, success, rwgrsn};
+                    let success = 1;
+                    let rwgrsn = -2;
+                    assets.sort((a, b) => (parseInt(a.assetid) < parseInt(b.assetid)) ? 1 : ((parseInt(b.assetid) < parseInt(a.assetid)) ? -1 : 0));
+                    data = {assets, descriptions, total_inventory_count, success, rwgrsn};
+                }
             } else {
                 alert("Failed via other endpoint aswell")
             }
@@ -1181,8 +1183,8 @@ CInventory.prototype.BuildInventoryTagFilters = function () {
         }
 
         rgCategoryTags.sort(function (a, b) {
-            var aName = a.internal_name.toUpperCase();
-            var bName = b.internal_name.toUpperCase();
+            var aName = a.name === undefined ? a.internal_name.toUpperCase() : a.name.toUpperCase();
+            var bName = b.name === undefined ? b.internal_name.toUpperCase() : b.name.toUpperCase();
             if (aName < bName) return -1;
             if (aName > bName) return 1;
             return 0;
