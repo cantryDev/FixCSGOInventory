@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "FixCSGOInventory",
+  "description": "This extension will use an other more stable endpoint to avoid loading errors",
+  "version": "1.0",
+  "permissions": [
+    "*://steamcommunity.com/*/inventory/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://steamcommunity.com/*/inventory/"
+      ],
+      "js": [
+        "js/InventoryInjector.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/SteamEconomyFixed.js"
+  ]
+}
