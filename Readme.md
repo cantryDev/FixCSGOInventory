@@ -13,3 +13,7 @@ This chrome extension loads the csgo inventories over a more stable endpoint to 
 3. Enable Developer mode by ticking the checkbox in the upper-right corner.
 4. Click on the "Load unpacked extension..." button.
 5. Select the directory de -> cantry -> fixcsgoinventory.
+
+## Known errors
+
+The advanced filter options are showing the internal names instead of the display names.
