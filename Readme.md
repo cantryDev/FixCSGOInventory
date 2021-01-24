@@ -1,6 +1,6 @@
 # FixCSGOInventory
 
-This chrome extension loads the csgo inventories over a more stable endpoint to avoid loading errors.
+This web extension loads the csgo inventories over a more stable endpoint to avoid loading errors.
 
 ## Showcase
 
