@@ -28,4 +28,4 @@ This chrome extension loads the csgo inventories over a more stable endpoint to 
 
 ### Firefox
 
-The Firefox implementation is a bit buggy. So if the loading error still shows up a page refresh will fix this.
+The Firefox implementation is a bit buggy. When you encounter the loading error you simply have to reload the page.
