@@ -5,7 +5,9 @@ var observer = new MutationObserver(function (mutations) {
             let node = mutation.addedNodes[i];
             if (node.tagName === "SCRIPT") {
                 if (node.getAttribute("src") != null && node.getAttribute("src").includes("economy_v2.js")) {
-                    node.setAttribute("src", chrome.extension.getURL("js/SteamEconomyFixed.js"));
+                    let element = document.createElement("script");
+                    element.setAttribute("src", chrome.extension.getURL("js/OverwrittenFunctions.js"));
+                    document.head.appendChild(element);
                 }
             }
         }
